@@ -1,5 +1,7 @@
 package org.example.eventos;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -54,6 +56,13 @@ public class EventosRecyclerAdapter extends FirebaseRecyclerAdapter<EventoItem,
         }
         @Override
         public void onClick(View view) {
+            int position = getAdapterPosition();
+            EventoItem currentItem = getItem(position);
+            Context context = EventosAplicacion.getAppContext();
+            Intent intent = new Intent(context, EventoDetalles.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("evento", currentItem.getId());
+            context.startActivity(intent);
         }
     }
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {

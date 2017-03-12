@@ -2,7 +2,9 @@ package org.example.eventos;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 /**
@@ -25,7 +27,18 @@ public class Dialogo extends Activity {
                             finish();
                         }
                     });
-            alertDialog.show(); extras.remove("mensaje");
+            alertDialog.show();
+            alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialogInterface) {
+                    if (getIntent().hasExtra("evento")){
+                        Intent i = new Intent(Dialogo.this,EventoDetalles.class);
+                        i.putExtra("evento",getIntent().getStringExtra("evento"));
+                        startActivity(i);
+                    }
+                }
+            });
+            extras.remove("mensaje");
         }
     }
 }

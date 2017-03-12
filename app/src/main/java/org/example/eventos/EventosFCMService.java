@@ -17,10 +17,10 @@ public class EventosFCMService extends FirebaseMessagingService {
             evento ="Evento: "+remoteMessage.getData().get("evento")+ "\n"; evento = evento + "Día: "+ remoteMessage.getData().get("dia")+ "\n"; evento = evento +"Ciudad: "+
                     remoteMessage.getData().get("ciudad")+"\n"; evento = evento +"Comentario: "
                     +remoteMessage.getData().get("comentario");
-            EventosAplicacion.mostrarDialogo(getApplicationContext(), evento);
+            EventosAplicacion.mostrarDialogo(getApplicationContext(), evento,remoteMessage.getData().get("evento"));
         } else {
             if (remoteMessage.getNotification() != null) {
-                EventosAplicacion.mostrarDialogo(getApplicationContext(), remoteMessage.getNotification().getBody());
+                EventosAplicacion.mostrarDialogo(getApplicationContext(), remoteMessage.getNotification().getBody(),"");
             }
         }
     }
